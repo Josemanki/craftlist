@@ -22,7 +22,8 @@ function SearchResults({ searchResults, setItemList, setSearchQuery, setSearchRe
       {result.name}
       <img 
         width={50} 
-        src={result.image_url_local} 
+        src={result.image_url_local}
+        alt={result.name} 
       />
     </li>
     )
