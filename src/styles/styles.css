@@ -1,0 +1,247 @@
+:root {
+  --background-dark: #141414;
+  --background-light: #1F1F1F;
+  --light-grey: #ADADAD;
+  --border-color: #434343;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  color: var(--light-grey);
+  background-color: var(--background-dark);
+
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #ffffff;
+  background-color: var(--background-light);
+}
+
+.header__title {
+  margin: 0px;
+}
+
+.header__subtitle {
+  margin: 10px 0px;
+  text-align: center;
+}
+
+.searchbar__wrapper {
+  max-width: 300px;
+  margin: 0 auto
+}
+
+.searchbar {
+  margin-top: 20px;
+  background-color: var(--background-light);
+  border-radius: 5px;
+  box-shadow: 0px 1px 5px 3px rgb(0, 0, 0, .12);
+}
+
+.searchbar__input {
+  height: 40px;
+  width: 100%;
+  color: var(--light-grey);
+  outline: none;
+  background-color: var(--background-dark);
+  border: 1px solid var(--border-color);
+  padding: 0px 20px;
+}
+
+.searchbar .autocom-box {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.autocom-box ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+.autocom-box li {
+  margin: 0px;
+  padding: 0px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: default;
+}
+
+.autocom-box li:hover {
+  cursor: pointer;
+  background-color: #393939;
+}
+
+.resource-list {
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.resource-list__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px 20px;
+  padding: 8px;
+  border: 2px solid var(--background-light)
+}
+
+.resource-list__clear-button { 
+  height: 35px;
+  background-color: var(--background-dark);
+  color: crimson;
+  border: 1px solid crimson;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all ease-in-out 200ms;
+}
+
+.resource-list__clear-button:hover {
+  background-color: crimson;
+  color: white;
+}
+
+.resource-list__title{
+  margin: 0px;
+}
+
+.resource-list__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  margin: 0px 20px 10px 20px;
+  border: 2px solid var(--background-light)
+}
+
+.resource-list__resource {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--background-dark);
+}
+
+.resource-list__resource-name {
+  flex: 1;
+}
+
+.resource-list__resource:nth-child(even) {
+  background-color: var(--background-light);
+}
+
+.resource-list__imageAmount {
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
+}
+
+.resource-list__empty-message {
+  background-color: var(--background-light);
+  grid-column: span 3;
+  padding: 10px 20px;
+  text-align: center;
+  width: 100%;
+}
+
+li {
+  text-decoration: none;
+  list-style: none;
+}
+
+.item-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.item-card {
+  margin: 15px 0px;
+  min-width: 300px;
+}
+
+.item-card__name-field {
+  background-color: var(--background-light);
+  border-radius: 10px 10px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.item-card__imageAmount {
+  display: flex;
+  align-items: center;
+}
+
+.item-card__resource-list {
+  padding: 0px;
+  margin: 0px;
+  border: 2px solid var(--background-light)
+}
+
+.item-card__resource {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 10px;
+}
+
+.item-card__resource:nth-child(even) {
+  background-color: var(--background-light);
+}
+
+.item-card__delete-button {
+  display: inline-block;
+  text-align: center;
+  color: crimson;
+  background-color: var(--background-light);
+  border: 1px solid crimson;
+  border-radius: 3px;
+  padding: 2px 8px 5px 8px;
+  cursor: pointer;
+  transition: all ease-in-out 200ms;
+}
+
+.item-card__delete-button:hover {
+  background-color: crimson;
+  color: white;
+}
+
+@media (min-width: 800px) {
+  .resource-list__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  list-style: none;
+  max-height: 514px;
+  }
+
+  .item-cards {
+    flex-wrap: wrap;
+  }
+
+  .item-card {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}
