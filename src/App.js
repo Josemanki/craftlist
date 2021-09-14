@@ -1,3 +1,5 @@
+import Header from './components/Header';
+import Footer from './components/Footer';
 import ResourceList from './components/ResourceList';
 import ItemCards from './components/ItemCards';
 import Searchbar from './components/Searchbar';
@@ -26,13 +28,13 @@ function App() {
   
   return (
     <div className="app">
-      <header className="header">
-        <h1 className="header__title">Craftlist</h1>
-        <p className="header__subtitle">Make your own shopping list when you are feeling like crafting!</p>
-      </header>
+      <Header />
+      <div className="container">
       <Searchbar itemList={itemList} setItemList={setItemList}/>
       <ResourceList itemList={itemList} recipeItems={recipeItems} setItemList={setItemList} setRecipeItems={setRecipeItems}/>
       <ItemCards itemList={itemList} recipeItems={recipeItems} setItemList={setItemList}/>
+      </div>
+      <Footer />
     </div>
   );
 }

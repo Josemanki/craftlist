@@ -16,11 +16,14 @@ html {
 body {
   color: var(--light-grey);
   background-color: var(--background-dark);
+}
 
+.app {
+  height: 100vh;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 
@@ -244,4 +247,19 @@ li {
     margin-right: 10px;
     margin-left: 10px;
   }
+}
+
+footer {
+    position: sticky;
+    height: 45px;
+    top: calc( 100vh - 45px );
+    text-align: center;
+}
+
+.copyright>a  {
+  color: var(--light-grey);
+}
+
+.credits>a  {
+  color: var(--light-grey);
 }

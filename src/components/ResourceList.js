@@ -41,7 +41,7 @@ function ResourceList({ itemList, recipeItems, setRecipeItems, setItemList }) {
 
   return (
     <div>
-      <div className="resource-list container">
+      <div className="resource-list">
         <div className="resource-list__heading">
           <h2 className="resource-list__title">Shopping List</h2>
           <button className="resource-list__clear-button" onClick={handleClearList}>Clear List</button>

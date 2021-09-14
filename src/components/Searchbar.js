@@ -35,7 +35,7 @@ function Searchbar({setItemList, itemList}) {
   }
 
   return (
-    <div className="container">
+    <div>
       <div className="searchbar__wrapper">
         <div className="searchbar">
           <input
