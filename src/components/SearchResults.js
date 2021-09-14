@@ -2,6 +2,8 @@ import React from 'react'
 
 function SearchResults({ searchResults, setItemList, setSearchQuery, setSearchResults }) {
 
+  const filteredSearchResults = searchResults.filter(item => item.type !== 'Pet' && item.type !== 'Petsmount')
+
   const handleStateChange = (e) => {
     if (e.target.innerText) {
       const stateItem = searchResults.filter(item => item.name === e.target.innerText)[0]
@@ -16,7 +18,7 @@ function SearchResults({ searchResults, setItemList, setSearchQuery, setSearchRe
     }
   }
 
-  const options = searchResults.map(result => {
+  const options = filteredSearchResults.map(result => {
     return(
     <li onClick={handleStateChange} key={result.ankama_id}>
       {result.name}
