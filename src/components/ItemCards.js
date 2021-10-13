@@ -1,15 +1,17 @@
 import React from 'react'
 import ItemCard from './ItemCard'
 
-function ItemCards({itemList, recipeItems, setItemList}) {
+function ItemCards({itemList, recipeItems, setItemList, setRecipeItems}) {
   return (
       <div className="item-cards">
         {itemList.map((item, index) => (
           <ItemCard 
             itemName={item.name} 
             image={item.image_url_local} 
+            quantity={item.quantity}
             recipe={item.recipe} 
             ankama_id={item.ankama_id}
+            setRecipeItems={setRecipeItems}
             recipeItems={recipeItems}
             setItemList={setItemList}
             itemList={itemList}

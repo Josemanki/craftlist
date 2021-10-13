@@ -22,9 +22,22 @@ body {
   height: 100vh;
 }
 
+.d-flex {
+  display: flex;
+}
+
+.bold {
+  font-weight: 600;
+}
+
 .container {
   max-width: 1300px;
   margin: 0 auto;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
 }
 
 .header {
@@ -42,9 +55,58 @@ body {
   margin: 0px;
 }
 
+.header__logo-link {
+  display: flex;
+  text-decoration: none;
+  color: white;
+}
+
+.header__title--accent {
+  color: #97BE0D;
+}
+
 .header__subtitle {
   margin: 10px 0px;
   text-align: center;
+}
+
+.homepage>a {
+  text-decoration: none;
+  color: white;
+}
+
+.homepage__title {
+  text-align: center;
+  color: white;
+}
+
+.homepage__cards {
+  display: flex;
+  justify-content: center;
+}
+
+.homepage__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--background-light);
+  min-width: 280px;
+  min-height: 350px;
+  border-radius: 6px;
+  margin: 15px 10px;
+  transition: 0.3s ease-in-out;
+}
+
+.homepage__card:hover{
+  background-color: var(--border-color);
+}
+
+.homepage__card-title {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bolder;
 }
 
 .searchbar__wrapper {
@@ -172,7 +234,7 @@ li {
 
 .item-cards {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 30px;
@@ -180,7 +242,7 @@ li {
 
 .item-card {
   margin: 15px 0px;
-  min-width: 300px;
+  min-width: 290px;
 }
 
 .item-card__name-field {
@@ -231,12 +293,89 @@ li {
   color: white;
 }
 
+.item-card__item-name {
+  max-width: 160px;
+}
+
+.item-card__item-amount {
+  width: 25px;
+  text-align: center;
+  background-color: #1F1F1F;
+  border: 2px solid #ADADAD;
+  color: #ADADAD;
+  margin-right: 5px;
+}
+
+.item-card__item-amount::-webkit-outer-spin-button,
+.item-card__item-amount::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.item-card__item-amount[type=number] {
+    -moz-appearance: textfield;
+}
+
+.dofuslab-form {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.dofuslab__input {
+  padding: .3rem .3rem;
+  margin: 0;
+}
+
+.dofuslab__error {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.dofuslab__instructions {
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.4;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.dofuslab__button {
+  padding: .3rem .3rem;
+  background-color: #97BE0D;
+  border: none;
+  border-bottom: #78980a .3rem solid;
+  margin: 0;
+  cursor: pointer;
+}
+
+.dofuslab__loading {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 20px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+    color: #97BE0D;
+  }
+  50% {
+    color: var(--light-grey);
+  }
+  100% {
+    color: #97BE0D;
+  }
+}
+
 @media (min-width: 800px) {
   .resource-list__list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   list-style: none;
-  max-height: 514px;
+  max-height: 800px;
   }
 
   .item-cards {
@@ -246,6 +385,10 @@ li {
   .item-card {
     margin-right: 10px;
     margin-left: 10px;
+  }
+
+  .dofuslab__input {
+  min-width: 500px;
   }
 }
 

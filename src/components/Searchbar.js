@@ -4,7 +4,7 @@ import SearchResults from './SearchResults'
 
 // Request URL https://enc.dofusdu.de/dofus/en/equipment?page%5Bnumber%5D=1&page%5Bsize%5D=20&search%5Bname%5D=harebourg
 
-function Searchbar({setItemList, itemList}) {
+function Searchbar({ setItemList, itemList, currentPage }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [isFocused, setIsFocused] = useState(false)
@@ -22,7 +22,11 @@ function Searchbar({setItemList, itemList}) {
   const handleInput = async (e) => {
     setSearchQuery(e.target.value)
     if (e.target.value.length >= 3) {
-      const res = await axios.get(`https://enc.dofusdu.de/dofus/en/equipment?page%5Bnumber%5D=1&page%5Bsize%5D=96&search%5Bname%5D=${e.target.value}`)
+      const requestUrl = currentPage === 'equipment' ? 
+      `https://enc.dofusdu.de/dofus/en/equipment?page%5Bnumber%5D=1&page%5Bsize%5D=96&search%5Bname%5D=` 
+      : 
+      `https://enc.dofusdu.de/dofus/en/consumables?page%5Bnumber%5D=1&page%5Bsize%5D=96&search%5Bname%5D=`
+      const res = await axios.get(`${requestUrl}${e.target.value}`)
       const filteredRes = res.data.items.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase()))
       const finalRes = await Promise.all(filteredRes.map(async (item) => {
         const itemData = await axios.get(item.item_url)

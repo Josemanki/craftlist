@@ -1,10 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Header() {
   return (
       <header className="header">
-        <h1 className="header__title">Craftlist</h1>
-        <p className="header__subtitle">Make your own shopping list when you are feeling like crafting!</p>
+        <Link className="header__logo-link" to="/">
+          <h1 className="header__title">Dofus</h1>
+          <h1 className="header__title header__title--accent">Craftlist</h1>
+        </Link>
       </header>
   )
 }

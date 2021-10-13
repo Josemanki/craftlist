@@ -1,13 +1,20 @@
 import React from 'react'
 
-function SearchResults({ searchResults, setItemList, setSearchQuery, setSearchResults }) {
+function SearchResults({ searchResults, itemList, setItemList, setSearchQuery, setSearchResults }) {
 
-  const filteredSearchResults = searchResults.filter(item => item.type !== 'Pet' && item.type !== 'Petsmount')
-
+  const filteredSearchResults = searchResults.filter(item => item.hasOwnProperty('recipe'))
+  // type !== 'Pet' && item.type !== 'Petsmount' && item.type !== 'Dofus'
   const handleStateChange = (e) => {
     if (e.target.innerText) {
       const stateItem = searchResults.filter(item => item.name === e.target.innerText)[0]
-      setItemList(prevState => [...prevState, stateItem])
+      const itemExists = itemList.findIndex(item => item.ankama_id === stateItem.ankama_id)
+      if(itemExists === -1) {
+        setItemList(prevState => [...prevState, { ...stateItem, quantity: 1 }])
+      } else if (itemExists > -1) {
+        const items = [...itemList]
+        items[itemExists].quantity++
+        setItemList(items)
+      }
       setSearchQuery('')
       setSearchResults([])
     } else if (e.target.parentElement.innerText) {

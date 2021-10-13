@@ -8,7 +8,11 @@ function ResourceList({ itemList, recipeItems, setRecipeItems, setItemList }) {
     let parsedResourceList = []
 
     itemList.map(item => {
-      resourceList.push(...item.recipe)
+      const summedRecipe = []
+      item.recipe.map((resource) => {
+        summedRecipe.push({ ...resource, quantity: resource.quantity * item.quantity })
+      })
+      resourceList.push(...summedRecipe)
     })
 
     var resources = {};
