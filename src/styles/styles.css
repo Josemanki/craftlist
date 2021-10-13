@@ -82,6 +82,7 @@ body {
 
 .homepage__cards {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -371,6 +372,10 @@ li {
 }
 
 @media (min-width: 800px) {
+  .homepage__cards {
+    flex-direction: row;
+  }
+
   .resource-list__list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
