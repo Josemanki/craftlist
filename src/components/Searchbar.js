@@ -1,42 +1,46 @@
-import axios from 'axios'
-import React, {useState} from 'react'
-import SearchResults from './SearchResults'
+import axios from "axios";
+import React, { useState } from "react";
+import SearchResults from "./SearchResults";
 
 // Request URL https://enc.dofusdu.de/dofus/en/equipment?page%5Bnumber%5D=1&page%5Bsize%5D=20&search%5Bname%5D=harebourg
 
 function Searchbar({ setItemList, itemList, currentPage }) {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState([])
-  const [isFocused, setIsFocused] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = () => {
-    setIsFocused(true)
-  }
+    setIsFocused(true);
+  };
 
   const handleFocusOut = () => {
     setTimeout(() => {
-      setIsFocused(false)
+      setIsFocused(false);
     }, 200);
-  }
+  };
 
   const handleInput = async (e) => {
-    setSearchQuery(e.target.value)
+    setSearchQuery(e.target.value);
     if (e.target.value.length >= 3) {
-      const requestUrl = currentPage === 'equipment' ? 
-      `https://enc.dofusdu.de/dofus/en/equipment?page%5Bnumber%5D=1&page%5Bsize%5D=96&search%5Bname%5D=` 
-      : 
-      `https://enc.dofusdu.de/dofus/en/consumables?page%5Bnumber%5D=1&page%5Bsize%5D=96&search%5Bname%5D=`
-      const res = await axios.get(`${requestUrl}${e.target.value}`)
-      const filteredRes = res.data.items.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase()))
-      const finalRes = await Promise.all(filteredRes.map(async (item) => {
-        const itemData = await axios.get(item.item_url)
-        return itemData.data
-      }))
-      setSearchResults(finalRes)
+      const requestUrl =
+        currentPage === "equipment"
+          ? `https://enc.dofusdu.de/dofus/en/equipment?page%5Bnumber%5D=1&page%5Bsize%5D=96&search%5Bname%5D=`
+          : `https://enc.dofusdu.de/dofus/en/resources?page%5Bnumber%5D=1&page%5Bsize%5D=96&search%5Bname%5D=`;
+      const res = await axios.get(`${requestUrl}${e.target.value}`);
+      const filteredRes = res.data.items.filter((item) =>
+        item.name.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      const finalRes = await Promise.all(
+        filteredRes.map(async (item) => {
+          const itemData = await axios.get(item.item_url);
+          return itemData.data;
+        })
+      );
+      setSearchResults(finalRes);
     } else if (!e.target.value) {
-      setSearchResults([])
+      setSearchResults([]);
     }
-  }
+  };
 
   return (
     <div>
@@ -51,18 +55,20 @@ function Searchbar({ setItemList, itemList, currentPage }) {
             className="searchbar__input"
             value={searchQuery}
           />
-          {isFocused && 
-          <SearchResults 
-            searchResults={searchResults} 
-            itemList={itemList} 
-            setItemList={setItemList}
-            setSearchQuery={setSearchQuery}
-            setSearchResults={setSearchResults}
-          />}
+          {isFocused && (
+            <SearchResults
+              searchResults={searchResults}
+              itemList={itemList}
+              setItemList={setItemList}
+              setSearchQuery={setSearchQuery}
+              setSearchResults={setSearchResults}
+              currentPage={currentPage}
+            />
+          )}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Searchbar
+export default Searchbar;
