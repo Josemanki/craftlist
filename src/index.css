@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.parent-flags {
+  display: flex;
+  flex-wrap: wrap;
+  /* for horizontal aligning of child divs */
+  justify-content: center;
+  /* for vertical aligning */
+  align-items: center;
+}

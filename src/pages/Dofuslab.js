@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import lang from "../components/Header";
 
 export default function Dofuslab({ setItemList }) {
   const [dofusLabError, setDofusLabError] = useState("");
@@ -19,7 +20,7 @@ export default function Dofuslab({ setItemList }) {
       await Promise.all(
         data.data.map(async (item) => {
           const res = await axios.get(
-            `https://enc.dofusdu.de/dofus/en/equipment/${item.dofusID}`
+            `https://enc.dofusdu.de/dofus/${lang}/equipment/${item.dofusID}`
           );
           if (res.data.hasOwnProperty("recipe")) {
             finalScrapeData.push({ ...res.data, quantity: 1 });
