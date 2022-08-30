@@ -18,16 +18,22 @@ export default function Dofuslab({ setItemList }) {
     if (!data.data.hasOwnProperty("error")) {
       await Promise.all(
         data.data.map(async (item) => {
-          const res = await axios.get(
-            `https://enc.dofusdu.de/dofus/en/equipment/${item.dofusID}`
-          );
-          if (res.data.hasOwnProperty("recipe")) {
-            finalScrapeData.push({ ...res.data, quantity: 1 });
+          try {
+            const res = await axios.get(
+              `https://api.dofusdu.de/dofus2/en/items/equipment/${item.dofusID}`
+            );
+            console.log(res.data);
+            if (res.data.recipe) {
+              finalScrapeData.push({ ...res.data, quantity: 1 });
+            }
+          } catch (error) {
+            console.log("No item with this ID!");
           }
         })
       );
       setItemList(finalScrapeData);
       setIsLoading(false);
+      console.log(finalScrapeData);
       history.push("/equipment");
     } else if (data.data.hasOwnProperty("error")) {
       setDofusLabError(data.data.error);

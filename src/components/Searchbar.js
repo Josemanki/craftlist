@@ -24,19 +24,15 @@ function Searchbar({ setItemList, itemList, currentPage }) {
     if (e.target.value.length >= 3) {
       const requestUrl =
         currentPage === "equipment"
-          ? `https://enc.dofusdu.de/dofus/en/equipment?page%5Bnumber%5D=1&page%5Bsize%5D=96&search%5Bname%5D=`
-          : `https://enc.dofusdu.de/dofus/en/resources?page%5Bnumber%5D=1&page%5Bsize%5D=96&search%5Bname%5D=`;
+          ? `https://api.dofusdu.de/dofus2/en/items/equipment/search?query=`
+          : `https://api.dofusdu.de/dofus2/en/items/resources/search?query=`;
       const res = await axios.get(`${requestUrl}${e.target.value}`);
-      const filteredRes = res.data.items.filter((item) =>
+      console.log(res);
+      const filteredRes = res.data.filter((item) =>
         item.name.toLowerCase().includes(e.target.value.toLowerCase())
       );
-      const finalRes = await Promise.all(
-        filteredRes.map(async (item) => {
-          const itemData = await axios.get(item.item_url);
-          return itemData.data;
-        })
-      );
-      setSearchResults(finalRes);
+      console.log(filteredRes);
+      setSearchResults(filteredRes);
     } else if (!e.target.value) {
       setSearchResults([]);
     }

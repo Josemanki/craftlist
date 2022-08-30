@@ -30,6 +30,11 @@ function ItemCard({
     setItemList(items);
   };
 
+  const resourceIndexes = recipe.map((item) => item.item_ankama_id);
+  const recipeToShow = recipeItems.filter((item) =>
+    resourceIndexes.includes(item.ankama_id)
+  );
+
   return (
     <div className="item-card">
       <div className="item-card__name-field">
@@ -53,27 +58,22 @@ function ItemCard({
       </div>
       <div className="item-card__recipe-list">
         <ul className="item-card__resource-list">
-          {recipe.map((item) => {
-            const resource = recipeItems.find(
-              (resource) => resource.ankama_id === item.ankama_id
+          {recipeToShow.map((resource) => {
+            return (
+              <li key={resource.ankama_id} className="item-card__resource">
+                <span className="item-card__resource-name">
+                  {resource.name}
+                </span>
+                <span className="item-card__imageAmount">
+                  <img
+                    src={resource.image_urls.icon}
+                    alt={resource.name}
+                    width={40}
+                  />
+                  <span>x {resource.quantity * quantity} -</span>
+                </span>
+              </li>
             );
-            if (resource) {
-              return (
-                <li key={resource.ankama_id} className="item-card__resource">
-                  <span className="item-card__resource-name">
-                    {resource.name}
-                  </span>
-                  <span className="item-card__imageAmount">
-                    <img
-                      src={resource.image_url_local}
-                      alt={resource.name}
-                      width={40}
-                    />
-                    <span>x {item.quantity * quantity} -</span>
-                  </span>
-                </li>
-              );
-            }
           })}
         </ul>
       </div>

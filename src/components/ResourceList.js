@@ -19,21 +19,20 @@ function ResourceList({ itemList, recipeItems, setRecipeItems, setItemList }) {
 
     var resources = {};
     resourceList.forEach((val) => {
-      if (resources[val.ankama_id])
-        resources[val.ankama_id] = {
-          id: val.ankama_id,
-          quantity: resources[val.ankama_id].quantity + val.quantity,
-          url: val.item_url,
+      if (resources[val.item_ankama_id])
+        resources[val.item_ankama_id] = {
+          id: val.item_ankama_id,
+          subtype: val.item_subtype,
+          quantity: resources[val.item_ankama_id].quantity + val.quantity,
         };
       else
-        resources[val.ankama_id] = {
-          id: val.ankama_id,
+        resources[val.item_ankama_id] = {
+          id: val.item_ankama_id,
+          subtype: val.item_subtype,
           quantity: val.quantity,
-          url: val.item_url,
         };
     });
     parsedResourceList = Array.from(Object.values(resources));
-
     const localData = JSON.parse(localStorage.getItem("recipeItems"));
 
     const finalResourceList = await Promise.all(
@@ -42,7 +41,9 @@ function ResourceList({ itemList, recipeItems, setRecipeItems, setItemList }) {
           (localItem) => localItem.ankama_id === item.id
         );
         if (cacheIndex === -1) {
-          const resource = await axios.get(item.url);
+          const resource = await axios.get(
+            `https://api.dofusdu.de/dofus2/en/items/${item.subtype}/${item.id}`
+          );
           return { ...resource.data, quantity: item.quantity };
         } else {
           const resource = localData[cacheIndex];
@@ -78,7 +79,7 @@ function ResourceList({ itemList, recipeItems, setRecipeItems, setItemList }) {
           {recipeItems.map((item) => (
             <li className="resource-list__resource" key={item.ankama_id}>
               <span className="resource-list__imageAmount">
-                <img src={item.image_url_local} alt={item.name} width={30} />
+                <img src={item.image_urls.icon} alt={item.name} width={30} />
                 <span> x {item.quantity} -</span>
               </span>
               <span className="resource-list__resource-name">{item.name}</span>
